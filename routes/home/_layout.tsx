@@ -32,12 +32,12 @@ export default function Layout({ Component, state }: PageProps) {
       <div class="flex">
         <nav class="p-4 min-h-screen w-1/6 flex flex-col">
             <ul class="flex flex-col space-y-4">
-                <li><a href="/projects" class="hover:text-lime-200">{circuitIcon()}<span class="pl-2 align-middle">Projects</span></a></li>
-                <li><a href="/parts" class="hover:text-lime-200">{bookIcon()}<span class="pl-2 align-middle">Part Library</span></a></li>
-                <li><a href="/about" class="hover:text-lime-200">{heartIcon()}<span class="pl-2 align-middle">About</span></a></li>
+                <li><a href="/projects" class="hover:text-sky-200">{circuitIcon()}<span class="pl-2 align-middle">Projects</span></a></li>
+                <li><a href="/parts" class="hover:text-sky-200">{bookIcon()}<span class="pl-2 align-middle">Part Library</span></a></li>
+                <li><a href="/about" class="hover:text-sky-200">{heartIcon()}<span class="pl-2 align-middle">About</span></a></li>
             </ul>
         </nav>
-        <main class="flex-grow bg-gradient-to-tr from-green-400 to-yellow-500 border-l-0 border-t-0 rounded-tl-3xl w-full">
+        <main class="flex-grow bg-gradient-to-tr from-teal-400 to-sky-400 border-l-0 border-t-0 rounded-tl-3xl w-full">
             <div class="bg-neutral-900 rounded-tl-[1.25em] p-4 w-full h-full m-1 p-0">
                 <Component />
             </div>

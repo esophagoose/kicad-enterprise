@@ -11,7 +11,9 @@ import * as $home_projects from "./routes/home/projects.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $project_name_ from "./routes/project/[name].tsx";
 import * as $project_layout from "./routes/project/_layout.tsx";
+import * as $project_schematic from "./routes/project/schematic.tsx";
 import * as $Counter from "./islands/Counter.tsx";
+import * as $Link from "./islands/Link.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -25,9 +27,11 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/project/[name].tsx": $project_name_,
     "./routes/project/_layout.tsx": $project_layout,
+    "./routes/project/schematic.tsx": $project_schematic,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
+    "./islands/Link.tsx": $Link,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

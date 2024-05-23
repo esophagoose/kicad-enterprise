@@ -1,4 +1,5 @@
 import { PageProps } from "$fresh/server.ts";
+import LinkButton from "../../islands/Link.tsx";
 
 function bookIcon() {
     return (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline-block">
@@ -27,11 +28,11 @@ export default function Layout({ Component, state }: PageProps) {
   return (
     <div class="bg-neutral-900 text-white min-h-screen flex flex-col overflow-hidden">
       <header class="p-4 flex">
-        <h1 class="text-2xl">{config.customizations.server_name}</h1>
+        <a href="/"><h1 class="text-2xl">{config.customizations.server_name}</h1></a>
         <div class="flex-grow"></div>
-        <button class="border border-teal-500 rounded-xl text-sm mx-2 px-4 text-neutral-300">SCHEMATIC</button>
-        <button class="border border-teal-500 rounded-xl text-sm mx-2 px-4 text-neutral-300">LAYOUT</button>
-        <button class="border border-teal-500 rounded-xl text-sm mx-2 px-4 text-neutral-300">BOM</button>
+        <LinkButton link="/test">SCHEMATIC</LinkButton>
+        <LinkButton link="/test">LAYOUT</LinkButton>
+        <LinkButton link="/test">BOM</LinkButton>
       </header>
       <div class="flex-grow flex flex-col bg-gradient-to-r from-sky-400 to-teal-500 border-l-0 border-t-0">
         <div class="mt-1 flex-grow flex flex-col">
