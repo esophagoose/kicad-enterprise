@@ -26,8 +26,15 @@ import { config } from "../../components/ProjectManager.tsx";
 export default function Layout({ Component, state }: PageProps) {
   return (
     <div class="bg-neutral-900 text-white min-h-screen flex flex-col overflow-hidden">
-      <header class="p-4">
+      <header class="p-4 flex">
         <h1 class="text-2xl">{config.customizations.server_name}</h1>
+        <div class="flex-grow flex items-center justify-center">
+          <input
+            type="text"
+            placeholder="SEARCH PROJECTS"
+            class="p-2 rounded-full w-1/4 text-center bg-neutral-900 text-white placeholder-neutral-600 border border-neutral-600 focus:outline-none focus:border-sky-500"
+          />
+        </div>
       </header>
       <div class="flex">
         <nav class="p-4 min-h-screen w-1/6 flex flex-col">
