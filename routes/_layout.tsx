@@ -14,20 +14,27 @@ function navItem(name: string, url: string, icon: () => JSX.Element){
 
 export default function Layout({ Component, state }: PageProps) {
   return (
-    <div class="bg-zinc-950 text-white min-h-screen flex overflow-hidden">
-      <nav class="min-h-screen w-1/6 flex flex-col divide-y divide-zinc-800 ">
+    <div class="bg-zinc-950 text-white min-h-screen flex">
+      <nav class="min-h-screen w-1/6 flex flex-col divide-y divide-zinc-800">
           <header class="px-4 py-6">
             <a href="/">
               <h1 class="text-2xl">{config.customizations.server_name}</h1>
             </a>
           </header>
-          <ul class="flex flex-col">
+          <ul class="flex flex-col flex-grow">
               {navItem("Projects", "/projects", circuitIcon)}
               {navItem("Part Library", "/parts", bookIcon)}
               {navItem("About", "/about", heartIcon)}
           </ul>
+          <footer class="font-mono text-sm text-gray-300 pb-3">
+            <div class="p-4">
+              <a href="https://github.com/esophagoose/kicad-enterprise">
+                kicad-enterprise: v0.0.1
+              </a>
+            </div>
+          </footer>
       </nav>
-      <main class="flex-grow mt-3 w-full">
+      <main class="flex-grow mt-3 w-full h-screen">
           <div class="bg-zinc-900 rounded-tl-md p-4 w-full h-full border border-zinc-800" f-client-nav>
               <Component />
           </div>
