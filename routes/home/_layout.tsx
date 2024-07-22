@@ -45,7 +45,7 @@ export default function Layout({ Component, state }: PageProps) {
             </ul>
         </nav>
         <main class="flex-grow bg-gradient-to-tr from-teal-400 to-sky-400 border-l-0 border-t-0 rounded-tl-3xl w-full">
-            <div class="bg-neutral-900 rounded-tl-[1.25em] p-4 w-full h-full m-1 p-0">
+            <div class="bg-neutral-900 rounded-tl-[1.25em] p-4 w-full h-full m-1 p-0" f-client-nav>
                 <Component />
             </div>
         </main>

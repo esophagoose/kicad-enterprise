@@ -1,9 +1,18 @@
 import { PageProps } from "$fresh/server.ts";
 import ProjectInfo, { projects } from "../../components/ProjectManager.tsx";
-import { asset } from "$fresh/runtime.ts";
+import { Partial, asset } from "$fresh/runtime.ts";
 
-function bomview(project) {
+function bom(project) {
   return <iframe class="flex-grow" src={asset("/bom/ibom.html")} title="Interactive BOM for KiCAD"></iframe>
+}
+
+function schematic(project) {
+  return (
+    <div class="flex-grow bg-neutral-900">
+      <script src="https://kicanvas.org/kicanvas/kicanvas.js"></script>
+      <kicanvas-embed src={asset("/sample.kicad_sch")} controls="full"></kicanvas-embed>
+    </div>
+  )
 }
 
 export default function ProjectPage(props: PageProps) {
@@ -15,14 +24,15 @@ export default function ProjectPage(props: PageProps) {
     }
   }
   if (!project) {
-    return;  // FIXME
+    return;
   }
 
   return (
-        <body f-client-nav>
-          {/* <Partial name="body"> */}
-            {/* <Component /> */}
-          {/* </Partial> */}
-        </body>
+    <div class="flex flex-col h-screen" f-client-nav>
+      <a href="#" f-partial="/project/schematic">SCHEMATIC</a>
+      <a href="/project/sample" f-partial="/project/bom">BOM</a>
+      <Partial name="project-content">
+      </Partial>
+    </div>
   );
 }
