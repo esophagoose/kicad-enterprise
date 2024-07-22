@@ -12,11 +12,11 @@ function randomNumber() {
 
 export default function LinkButton({ children, classes, link }: Props) {
   return (
-    <button 
-        class="border border-teal-500 rounded-xl text-sm mx-2 px-4 text-neutral-300 hover:bg-teal-900 active:bg-teal-800"
-        onClick={() => (location.href = link)}
+    <button
+      class="border border-teal-500 rounded-xl text-sm mx-2 px-4 text-neutral-300 hover:bg-teal-900 active:bg-teal-800"
+      onClick={() => (location.href = link)}
     >
-        {children}
+      {children}
     </button>
   );
 }
@@ -24,7 +24,7 @@ export default function LinkButton({ children, classes, link }: Props) {
 export function LinkDiv({ children, classes, link }: Props) {
   return (
     <div class={classes} onClick={() => (location.href = link)}>
-        {children}
+      {children}
     </div>
   );
 }

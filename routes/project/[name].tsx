@@ -1,25 +1,33 @@
 import { PageProps } from "$fresh/server.ts";
 import ProjectInfo, { projects } from "../../components/ProjectManager.tsx";
-import { Partial, asset } from "$fresh/runtime.ts";
+import { asset, Partial } from "$fresh/runtime.ts";
 
 function bom(project) {
-  return <iframe class="flex-grow" src={asset("/bom/ibom.html")} title="Interactive BOM for KiCAD"></iframe>
+  return (
+    <iframe
+      class="flex-grow"
+      src={asset("/bom/ibom.html")}
+      title="Interactive BOM for KiCAD"
+    >
+    </iframe>
+  );
 }
 
 function schematic(project) {
   return (
     <div class="flex-grow bg-neutral-900">
       <script src="https://kicanvas.org/kicanvas/kicanvas.js"></script>
-      <kicanvas-embed src={asset("/sample.kicad_sch")} controls="full"></kicanvas-embed>
+      <kicanvas-embed src={asset("/sample.kicad_sch")} controls="full">
+      </kicanvas-embed>
     </div>
-  )
+  );
 }
 
 export default function ProjectPage(props: PageProps) {
   let project: ProjectInfo | null = null;
   for (const proj of projects) {
     if (proj.name === props.params.name) {
-      console.log('Found project:', JSON.stringify(proj, null, 2));
+      console.log("Found project:", JSON.stringify(proj, null, 2));
       project = proj;
     }
   }
