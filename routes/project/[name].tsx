@@ -1,6 +1,8 @@
 import { PageProps } from "$fresh/server.ts";
-import ProjectInfo, { projects } from "../../components/ProjectManager.tsx";
+import ProjectInfo from "../../components/ProjectManager.tsx";
 import { asset, Partial } from "$fresh/runtime.ts";
+import { kv } from "../../components/Database.tsx";
+
 
 function bom(project) {
   return (
@@ -23,24 +25,18 @@ function schematic(project) {
   );
 }
 
-export default function ProjectPage(props: PageProps) {
-  let project: ProjectInfo | null = null;
-  for (const proj of projects) {
-    if (proj.name === props.params.name) {
-      console.log("Found project:", JSON.stringify(proj, null, 2));
-      project = proj;
-    }
-  }
-  if (!project) {
-    return;
-  }
 
-  return (
-    <div class="flex flex-col h-screen" f-client-nav>
-      <a href="#" f-partial="/project/schematic">SCHEMATIC</a>
-      <a href="/project/sample" f-partial="/project/bom">BOM</a>
-      <Partial name="project-content">
-      </Partial>
-    </div>
-  );
+export default async function ProjectPage(req: Request, ctx: RouteContext) {
+  const entry = await kv.get(["projects", ctx.params.name])
+  console.log(ctx)
+  if (entry.value === null) {
+    return ctx.renderNotFound();
+  } else {
+    const headers = new Headers();
+    headers.set("location", `/project/${ctx.params.name}/schematic`);
+    return new Response(null, {
+      status: 302,
+      headers,
+    });
+  }
 }

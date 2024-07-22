@@ -1,4 +1,4 @@
-import { projects } from "../../components/ProjectManager.tsx";
+// import { projects } from "../../components/ProjectManager.tsx";
 import projectCard from "../../components/ProjectCard.tsx";
 
 function noProjectsFound() {

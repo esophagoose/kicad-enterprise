@@ -1,5 +1,7 @@
-import { projects } from "../components/ProjectManager.tsx";
+import { kv } from "../components/Database.tsx";
 import projectCard from "../components/ProjectCard.tsx";
+import ProjectInfo from "../components/ProjectManager.tsx";
+
 
 function noProjectsFound() {
   return (
@@ -14,14 +16,15 @@ function noProjectsFound() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const projects = await Array.fromAsync(kv.list({ prefix: ["projects"] }));
+
   if (projects.length == 0) {
     return noProjectsFound();
   }
-
   return (
     <div class="flex flex-wrap font-mono">
-      {projects.map((project) => projectCard(project))}
+      {projects.map((project: Deno.KvEntry<ProjectInfo>) => projectCard(project.value))}
     </div>
   );
 }

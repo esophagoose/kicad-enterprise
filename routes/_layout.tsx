@@ -23,7 +23,7 @@ export default function Layout({ Component, state }: PageProps) {
           </a>
         </header>
         <ul class="flex flex-col flex-grow">
-          {navItem("Projects", "/projects", circuitIcon)}
+          {navItem("Projects", "/", circuitIcon)}
           {navItem("Part Library", "/parts", bookIcon)}
           {navItem("About", "/about", heartIcon)}
         </ul>
