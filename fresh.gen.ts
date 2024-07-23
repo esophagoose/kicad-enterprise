@@ -16,6 +16,7 @@ import * as $project_name_schematic from "./routes/project/[name]/schematic.tsx"
 import * as $project_layout from "./routes/project/_layout.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $Link from "./islands/Link.tsx";
+import * as $SchematicView from "./islands/SchematicView.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -36,6 +37,7 @@ const manifest = {
   islands: {
     "./islands/Counter.tsx": $Counter,
     "./islands/Link.tsx": $Link,
+    "./islands/SchematicView.tsx": $SchematicView,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
