@@ -98,4 +98,4 @@ async function clear() {
   }
 }
 
-update();
+// update();
