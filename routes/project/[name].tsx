@@ -3,7 +3,6 @@ import ProjectInfo from "../../components/ProjectManager.tsx";
 import { asset, Partial } from "$fresh/runtime.ts";
 import { kv } from "../../components/Database.tsx";
 
-
 function bom(project) {
   return (
     <iframe
@@ -25,10 +24,9 @@ function schematic(project) {
   );
 }
 
-
 export default async function ProjectPage(req: Request, ctx: RouteContext) {
-  const entry = await kv.get(["projects", ctx.params.name])
-  console.log(ctx)
+  const entry = await kv.get(["projects", decodeURI(ctx.params.name)]);
+
   if (entry.value === null) {
     return ctx.renderNotFound();
   } else {

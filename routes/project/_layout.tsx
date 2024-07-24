@@ -29,7 +29,7 @@ export default function Layout(props: PageProps) {
     <div class="bg-zinc-900 text-white min-h-screen flex flex-col overflow-hidden">
       <header class="p-4 flex">
         <a class="text-2xl pl-1 pr-4 text-gray-300" href="/">{leftArrow()}</a>
-        <h1 class="text-2xl">{props.params.name}</h1>
+        <h1 class="text-2xl">{decodeURI(props.params.name)}</h1>
         <div class="flex-grow"></div>
         <LinkButton link={`/project/${props.params.name}/schematic`}>
           SCHEMATIC
@@ -38,7 +38,7 @@ export default function Layout(props: PageProps) {
         <LinkButton link={`/project/${props.params.name}/bom`}>BOM</LinkButton>
       </header>
       <div class="flex-grow flex flex-col bg-gradient-to-r from-sky-400 to-teal-500 border-l-0 border-t-0">
-        <div class="mt-0.5 flex-grow flex flex-col">
+        <div class="mt-0.5 flex-grow flex">
           <props.Component />
         </div>
       </div>

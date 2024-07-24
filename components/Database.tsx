@@ -17,7 +17,7 @@ interface FileInfo {
   lastModified: Date;
 }
 
-interface Schematic {
+export interface SchematicInfo {
   name: string;
   path: string;
   lastModified: Date;
@@ -46,16 +46,15 @@ async function parseKicadProject(location: string) {
       continue;
     }
     const svgPath = convertSchematicToSvg(file.name, location);
-    const schematic: Schematic = {
+    const schematic: SchematicInfo = {
       name: file.name,
       path: location,
       lastModified: Deno.statSync(location).mtime ?? new Date(),
       svgPath: svgPath,
     };
     const result = await kv.set([
-      "projects",
+      "schematics",
       project.name,
-      "schematic",
       schematic.name,
     ], schematic);
     console.log("  Adding schematic: ", schematic, "success: ", result.ok);
@@ -71,14 +70,32 @@ export async function update() {
     let isKicadProject = false;
     console.log(`Checking location: ${location}`);
     for (const file of Deno.readDirSync(location)) {
-      if (file.name.includes(".kicad_"))
+      if (file.name.includes(".kicad_")) {
         isKicadProject = true;
+      }
     }
     if (isKicadProject) {
       await parseKicadProject(location);
     }
   }
   console.log("ProjectManager update complete.");
+}
+
+async function clear() {
+  const p = kv.list({ prefix: ["projects"] });
+  for await (const entry of p) {
+    if (entry.key.length > 1) {
+      console.log(entry.key);
+      kv.delete(entry.key);
+    }
+  }
+  const s = kv.list({ prefix: ["schematics"] });
+  for await (const entry of s) {
+    if (entry.key.length > 1) {
+      console.log(entry.key);
+      kv.delete(entry.key);
+    }
+  }
 }
 
 update();

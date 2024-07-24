@@ -1,5 +1,5 @@
 import { PageProps } from "$fresh/server.ts";
-import { config } from "../components/ProjectManager.tsx";
+import { user_config } from "../components/Database.tsx";
 import { bookIcon, circuitIcon, heartIcon } from "../components/Icons.tsx";
 
 function navItem(name: string, url: string, icon: () => JSX.Element) {
@@ -19,7 +19,7 @@ export default function Layout({ Component, state }: PageProps) {
       <nav class="min-h-screen w-1/6 flex flex-col divide-y divide-zinc-800">
         <header class="px-4 py-6">
           <a href="/">
-            <h1 class="text-2xl">{config.customizations.server_name}</h1>
+            <h1 class="text-2xl">{user_config.customizations.server_name}</h1>
           </a>
         </header>
         <ul class="flex flex-col flex-grow">

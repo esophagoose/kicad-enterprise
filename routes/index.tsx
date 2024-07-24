@@ -2,7 +2,6 @@ import { kv } from "../components/Database.tsx";
 import projectCard from "../components/ProjectCard.tsx";
 import ProjectInfo from "../components/ProjectManager.tsx";
 
-
 function noProjectsFound() {
   return (
     <div class="flex flex-col h-full w-full items-center justify-center text-neutral-600">
@@ -24,7 +23,9 @@ export default async function Home() {
   }
   return (
     <div class="flex flex-wrap font-mono">
-      {projects.map((project: Deno.KvEntry<ProjectInfo>) => projectCard(project.value))}
+      {projects.map((project: Deno.KvEntry<ProjectInfo>) =>
+        projectCard(project.value)
+      )}
     </div>
   );
 }

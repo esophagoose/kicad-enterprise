@@ -1,4 +1,4 @@
-import ProjectInfo from "../components/ProjectManager.tsx";
+import ProjectInfo from "../components/Database.tsx";
 import { LinkDiv } from "../islands/Link.tsx";
 
 export default function projectCard(project: ProjectInfo) {
@@ -33,7 +33,7 @@ export default function projectCard(project: ProjectInfo) {
       <span class="text-sm">
         Last Updated:{" "}
         <span>
-          {project.lastUpdated.toLocaleDateString("en-US", {
+          {project.lastModified.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
