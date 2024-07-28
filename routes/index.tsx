@@ -1,6 +1,22 @@
 import { kv } from "../components/Database.tsx";
 import projectCard from "../components/ProjectCard.tsx";
 import ProjectInfo from "../components/ProjectManager.tsx";
+import Layout from "../components/Layout.tsx";
+import { user_config } from "../components/Database.tsx";
+import { bookIcon, circuitIcon, heartIcon } from "../components/Icons.tsx";
+
+const TITLE = user_config.customizations.server_name;
+
+function navItem(name: string, url: string, icon: () => JSX.Element) {
+  return (
+    <li class="hover:bg-sky-800 p-4">
+      <a href={url}>
+        {icon()}
+        <span class="pl-2 align-middle">{name}</span>
+      </a>
+    </li>
+  );
+}
 
 function noProjectsFound() {
   return (
@@ -17,15 +33,24 @@ function noProjectsFound() {
 
 export default async function Home() {
   const projects = await Array.fromAsync(kv.list({ prefix: ["projects"] }));
+  const nav = (
+    <>
+      {navItem("Projects", "/", circuitIcon)}
+      {navItem("Part Library", "/parts", bookIcon)}
+      {navItem("About", "/about", heartIcon)}
+    </>
+  );
 
   if (projects.length == 0) {
     return noProjectsFound();
   }
   return (
-    <div class="flex flex-wrap font-mono">
-      {projects.map((project: Deno.KvEntry<ProjectInfo>) =>
-        projectCard(project.value)
-      )}
-    </div>
+    <Layout title={TITLE} navItems={nav}>
+      <div class="flex flex-wrap font-mono">
+        {projects.map((project: Deno.KvEntry<ProjectInfo>) =>
+          projectCard(project.value)
+        )}
+      </div>
+    </Layout>
   );
 }

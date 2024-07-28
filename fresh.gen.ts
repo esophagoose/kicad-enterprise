@@ -4,7 +4,6 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
-import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $home_layout from "./routes/home/_layout.tsx";
@@ -13,7 +12,6 @@ import * as $index from "./routes/index.tsx";
 import * as $project_name_ from "./routes/project/[name].tsx";
 import * as $project_name_bom from "./routes/project/[name]/bom.tsx";
 import * as $project_name_schematic from "./routes/project/[name]/schematic.tsx";
-import * as $project_layout from "./routes/project/_layout.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $Link from "./islands/Link.tsx";
 import * as $SchematicView from "./islands/SchematicView.tsx";
@@ -23,7 +21,6 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
-    "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
     "./routes/api/joke.ts": $api_joke,
     "./routes/home/_layout.tsx": $home_layout,
@@ -32,7 +29,6 @@ const manifest = {
     "./routes/project/[name].tsx": $project_name_,
     "./routes/project/[name]/bom.tsx": $project_name_bom,
     "./routes/project/[name]/schematic.tsx": $project_name_schematic,
-    "./routes/project/_layout.tsx": $project_layout,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,

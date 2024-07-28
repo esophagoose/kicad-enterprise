@@ -1,6 +1,7 @@
 import { JSX } from "preact/jsx-runtime";
 import { kv, SchematicInfo } from "../../../components/Database.tsx";
 import SchView from "../../../islands/SchematicView.tsx";
+import Layout from "../../../components/Layout.tsx";
 
 function createSchematicLink(name: string) {
   return (
@@ -9,7 +10,7 @@ function createSchematicLink(name: string) {
     </li>
   );
 }
-export default async function ProjectPage(req: Request, ctx: RouteContext) {
+export default async function ProjectPage(_req: Request, ctx: RouteContext) {
   const result = kv.list({
     prefix: ["schematics", decodeURI(ctx.params.name)],
   });
@@ -25,15 +26,8 @@ export default async function ProjectPage(req: Request, ctx: RouteContext) {
   }
   const svgContent = await Deno.readTextFile(schematics[0].svgPath);
   return (
-    <>
-      <nav class="w-1/6 flex flex-col bg-zinc-900 border-r-2 border-sky-500">
-        <h3 class="px-4 py-2 text-sm font-semibold">SCHEMATICS</h3>
-        <hr class="mx-2"></hr>
-        <ul>
-          {schNavList}
-        </ul>
-      </nav>
+    <Layout title={decodeURI(ctx.params.name)} navItems={schNavList}>
       <SchView svg={svgContent} />
-    </>
+    </Layout>
   );
 }

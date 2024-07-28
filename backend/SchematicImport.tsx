@@ -19,7 +19,7 @@ export function convertSchematicToSvg(filename: string, filepath: string) {
   const project_name = filepath.substring(filepath.lastIndexOf("/") + 1);
   const output_folder = `${Deno.cwd()}/static/${project_name}`;
   const svgFilepath = `${output_folder}/${filename.split(".kicad_sch")[0]}.svg`;
-  
+
   try {
     Deno.mkdirSync(output_folder);
   } catch (err) {
@@ -27,7 +27,7 @@ export function convertSchematicToSvg(filename: string, filepath: string) {
       throw err;
     }
   }
-  const  command = new Deno.Command(KICAD_CLI, {
+  const command = new Deno.Command(KICAD_CLI, {
     args: [
       "sch",
       "export",
@@ -42,7 +42,7 @@ export function convertSchematicToSvg(filename: string, filepath: string) {
   let updatedSvgContent = svgContent;
 
   for (const [key, value] of Object.entries(theme)) {
-    updatedSvgContent = updatedSvgContent.replace(new RegExp(key, 'g'), value);
+    updatedSvgContent = updatedSvgContent.replace(new RegExp(key, "g"), value);
   }
 
   Deno.writeTextFileSync(svgFilepath, updatedSvgContent);
