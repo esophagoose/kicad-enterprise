@@ -13,13 +13,13 @@ const theme = {
   "#0F0F0F": "#fbcfe8", // Net name
 };
 
-// /Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch export svg
 const KICAD_CLI = "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli";
 
 export function convertSchematicToSvg(filename: string, filepath: string) {
   const project_name = filepath.substring(filepath.lastIndexOf("/") + 1);
   const output_folder = `${Deno.cwd()}/static/${project_name}`;
   const svgFilepath = `${output_folder}/${filename.split(".kicad_sch")[0]}.svg`;
+  
   try {
     Deno.mkdirSync(output_folder);
   } catch (err) {
@@ -27,7 +27,7 @@ export function convertSchematicToSvg(filename: string, filepath: string) {
       throw err;
     }
   }
-  let command = new Deno.Command(KICAD_CLI, {
+  const  command = new Deno.Command(KICAD_CLI, {
     args: [
       "sch",
       "export",
@@ -38,5 +38,13 @@ export function convertSchematicToSvg(filename: string, filepath: string) {
     ],
   });
   const result = command.outputSync();
+  const svgContent = Deno.readTextFileSync(svgFilepath);
+  let updatedSvgContent = svgContent;
+
+  for (const [key, value] of Object.entries(theme)) {
+    updatedSvgContent = updatedSvgContent.replace(new RegExp(key, 'g'), value);
+  }
+
+  Deno.writeTextFileSync(svgFilepath, updatedSvgContent);
   return result.success, svgFilepath;
 }
