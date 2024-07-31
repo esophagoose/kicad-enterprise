@@ -1,15 +1,15 @@
-import { kv } from "../components/Database.tsx";
+import ProjectInfo, { kv } from "../components/Database.tsx";
 import projectCard from "../components/ProjectCard.tsx";
-import ProjectInfo from "../components/ProjectManager.tsx";
 import Layout from "../components/Layout.tsx";
 import { user_config } from "../components/Database.tsx";
 import { bookIcon, circuitIcon, heartIcon } from "../components/Icons.tsx";
+import type { JSX } from "preact";
 
 const TITLE = user_config.customizations.server_name;
 
 function navItem(name: string, url: string, icon: () => JSX.Element) {
   return (
-    <li class="hover:bg-sky-800 p-4">
+    <li class="hover:bg-gradient-to-r from-teal-700 to-cyan-700 p-4">
       <a href={url}>
         {icon()}
         <span class="pl-2 align-middle">{name}</span>
@@ -32,14 +32,14 @@ function noProjectsFound() {
 }
 
 export default async function Home() {
-  const projects = await Array.fromAsync(kv.list({ prefix: ["projects"] }));
-  const nav = (
-    <>
-      {navItem("Projects", "/", circuitIcon)}
-      {navItem("Part Library", "/parts", bookIcon)}
-      {navItem("About", "/about", heartIcon)}
-    </>
-  );
+  const projects = await Array.fromAsync(
+    kv.list({ prefix: ["projects"] }),
+  ) as Array<Deno.KvEntry<ProjectInfo>>;
+  const nav = [
+    navItem("Projects", "/", circuitIcon),
+    navItem("Part Library", "/parts", bookIcon),
+    navItem("About", "/about", heartIcon),
+  ];
 
   if (projects.length == 0) {
     return noProjectsFound();
@@ -47,9 +47,7 @@ export default async function Home() {
   return (
     <Layout title={TITLE} navItems={nav}>
       <div class="flex flex-wrap font-mono">
-        {projects.map((project: Deno.KvEntry<ProjectInfo>) =>
-          projectCard(project.value)
-        )}
+        {projects.map((p: Deno.KvEntry<ProjectInfo>) => projectCard(p.value))}
       </div>
     </Layout>
   );

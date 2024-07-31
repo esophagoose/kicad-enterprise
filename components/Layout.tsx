@@ -1,4 +1,12 @@
-export default function Layout({ children, title, navItems }: Props) {
+import { JSX } from "preact/jsx-runtime";
+
+interface LayoutProps {
+  children: JSX.Element;
+  title: string;
+  navItems: JSX.Element[];
+}
+
+export default function Layout({ children, title, navItems }: LayoutProps) {
   return (
     <div class="bg-zinc-950 text-white min-h-screen flex">
       <nav class="min-h-screen w-1/6 flex flex-col divide-y divide-zinc-800">
